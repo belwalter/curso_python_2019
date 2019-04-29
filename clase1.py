@@ -1,6 +1,7 @@
 
 print("hola mundo")
 
+
 # texto = input("ingrese una frase")
 
 texto = 'hola'
