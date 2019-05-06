@@ -2,7 +2,7 @@
 print("hola mundo")
 
 
-# texto = input("ingrese una frase")
+texto = input("ingrese una frase")
 
 texto = 'hola'
 
