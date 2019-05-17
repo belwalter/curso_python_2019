@@ -15,7 +15,7 @@ l.insert(2, 3)
 aux = l.pop(2)
 l.remove(1)
 l.reverse()
-l.sort() # criterio
+l.sort() # criterio cuando veamos clase
 
 if("hola" in l):
     print("si")
@@ -51,11 +51,15 @@ print(s)
 print(r)
 print(p)
 
+f = sumar_y_resta(4, 6, num4=5)
+print('tipo de dato', type(f))
 num = 15
 
 ln = [1, 2, 3, 4]
 
 ln.sort()
+
+
 def prueba(n):
     n.append(5)
 
