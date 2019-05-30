@@ -3,7 +3,7 @@
 # DICCIONARIOS
 
 dic = {1: ['hola', 2, 3], 2: {}, 100: 'algo', 'a': 2, 'b': "asdasd"}
-
+dic = {}
 # print(type(dic))
 # print(len(dic))
 
@@ -18,6 +18,9 @@ if('c' in dic):
 else:
     print('no')
 
+for claves in dic.keys():
+    print(claves)
+
 for elemento in dic.values():
     print(elemento)
 
@@ -27,7 +30,7 @@ s1 = set([4, 2, 5])
 
 print(s.difference(s1))
 for elemento in s:
-    print(elemento) 
+    print(elemento)
 
 print(type(s))
 
@@ -43,35 +46,59 @@ t = (1, 3, 5)
 # clase abstracta
 
 
-class Persona():
+class Persona(object):
     """Clases persona......"""
 
-    def __init__(self, nombre, apellido, tel):
+    def __init__(self, nombre, apellido=None, tel=None):
         self.__nombre = nombre
         self.__apellido = apellido
         self.__tel = tel
 
-
-    def get_nombre(self):
+    @property
+    def nombre(self):
         """este metodo devuelve el nombre"""
         return self.__nombre
 
-    def get_apellido(self):
+    @nombre.setter
+    def nombre(self, nombre):
+        self.__nombre = nombre
+
+    @property
+    def apellido(self):
         """este metodo devuelve el nombre"""
         return self.__apellido
 
-    def set_nombre(self, nombre):
-        self.__nombre = nombre
+    @apellido.setter
+    def nombre(self, apellido):
+        self.__apellido = apellido
+
 
 
     def caminar(self):
         print(self.__nombre, "esta caminando")
 
 
-p1 = Persona('juan', 'zulma', 1234)
+class Empleado(Persona):
+
+    def __init__(self, cuit, nombre):
+        Persona.__init__(self, nombre)
+        self.cuit = cuit
+
+    def trabajar(self):
+        print('algo')
+
+e = Empleado(1234, 'walter')
+e.nombre = "juan"
+e1 = Empleado(1235, 'juan')
+e1.nombre = "julian"
+
+
+p1 = Persona('walter', 'sanchez',789)
 p2 = Persona('maria', 'jose', 456)
 p3 = Persona('Ana', 'jose', 456)
 
+#p1.nombre= "walter"
+#print(p1.nombre)
 # print(type(p))
 # print(p == p1)
 # print(p.nombre, p1.nombre)
@@ -82,9 +109,11 @@ p3 = Persona('Ana', 'jose', 456)
 # print(p.get_nombre())
 
 def criterio(elemento):
-    return elemento.get_nombre() + elemento.get_apellido()
+    return elemento.nombre
 
-lista = [p1, p2, p3]
+lista = [p1, p2, p3, e1, e]
 lista.sort(key=criterio)
 for per in lista:
-    print(per.get_nombre(), per.get_apellido())
+    print(per.nombre)
+    if(isinstance(per, Empleado)):
+        per.trabajar()
