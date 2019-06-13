@@ -38,6 +38,7 @@ a = Acuatico()
 class Cocodrilo(Acuatico, Terrestre):
 
     def desplazar(self):
+        Acuatico.desplazarse()
         print('el animal nada o canina dependediendo......')
 
 c = Cocodrilo()
