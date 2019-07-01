@@ -1,11 +1,13 @@
-<form action="/update" method="POST">
       <div class="form-group">
       <input type="hidden" name="valor0" value="{{documento['_id']}}">
       </div>
     <div class="form-group">
       <label>Nombre</label><br>
-      <input type="text" class="form-control" name="valor1" value="{{documento['nombre']}}" placeholder="nombre del superhéroe">
+      <input type="text" class="form-control" id="name" name="valor1" value="{{documento['nombre']}}" placeholder="nombre del superhéroe" oninput="load_image()">
       </div>
+      <div class="form-group">
+        <img class="float-rigth" id="logo" src="static/image/logos/{{documento['nombre'].lower().replace('-', ' ').replace(' ', '_')}}.png" width="64">
+        </div>
       <div class="form-group">
       <label>Nombre del Personaje</label>
       <input type="text" class="form-control" name="valor2" value="{{documento['personaje']}}" placeholder="nombre del personaje">
@@ -18,9 +20,3 @@
       <label>Biografía</label>
       <textarea class="form-control" name="valor3" rows="5" placeholder="breve biografia">{{documento['biografia']}}</textarea>
       </div>
-      <div class="form-group">
-        <button type="submit" name="action" value="back" class="btn btn-primary">Back</button>
-        <button type="submit" name="action" value="update" class="btn btn-warning">Update</button>
-        <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
-    </div>
-</form>

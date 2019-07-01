@@ -10,10 +10,17 @@
   <div class="container" style="padding: 10px; ">
     <div class="row">
     <div class="col" style="width:50%">
-    {% include 'componentes/form_img.html' %}
+      <img class="float-left" src="static/image/characters/{{documento['nombre'].lower().replace('-', ' ').replace(' ', '_')}}.png" width="512">
     </div>
     <div class="col" style="width:50%">
-      <img class="float-rigth" src="static/image/characters/{{documento['nombre'].lower().replace('-', ' ').replace(' ', '_')}}.png">
+      <form action="/update" method="POST">
+        {% include 'componentes/detalle_form.html' %}
+        <div class="form-group">
+          <button type="submit" name="boton" value="back" class="btn btn-dark">Back</button>
+          <button type="submit" name="boton" value="update" class="btn btn-warning">Update</button>
+          <button type="submit" name="boton" value="delete" class="btn btn-danger">Delete</button>
+      </div>
+      </form>
     </div>
   </div>
   </div>
