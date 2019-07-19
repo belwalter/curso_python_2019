@@ -6,12 +6,26 @@ import json
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     """Retorna la pagina index."""
+    op_alta = False
+    res_alta = True
     lista = get_all()
-    #return jsonify(lista)
-    return render_template('/index.html', datos=lista)
+    lista.sort(key=orden)
+    if(request.method == 'POST'):
+        filtro = request.form['filtro']
+        criterio = request.form['selection']
+        laux = []
+        for documento in lista:
+            if(criterio == "Nombre" and documento['nombre'][0:len(filtro)].lower() == filtro.lower()):
+                laux.append(documento)
+            elif (criterio == "Personaje" and documento['personaje'][0:len(filtro)].lower() == filtro.lower()):
+                laux.append(documento)
+            elif (criterio == "Biografía" and documento['biografia'].find(filtro) > -1):
+                laux.append(documento)
+        lista = laux
+    return render_template('/index.html', datos=lista, op_alta=op_alta, res_alta=res_alta)
 
 @app.route('/cargar')
 def cargar():
@@ -26,9 +40,9 @@ def guardar():
     dic['biografia'] = request.form['valor3']
     if(len(request.form['valor4']) > 0):
         dic['aparicion'] = int(request.form['valor4'])
-    save_doc(dic)
+    resultado = save_doc(dic)
     lista = get_all()
-    return redirect(url_for('index'))
+    return redirect(url_for('index', ))
 
 @app.route('/update', methods=['POST'])
 def update():
@@ -58,6 +72,10 @@ def detalle():
 def about():
     """Retorna la pagina about."""
     return render_template('/about.html', valor_h1="About")
+
+
+def orden(documento):
+    return documento['nombre']
 
 
 if __name__ == '__main__':

@@ -9,8 +9,14 @@ def connection():
 
 
 def save_doc(documento):
-    db = connection()
-    db.superheroes.insert(documento)
+    control = False
+    try:
+        db = connection()
+        db.superheroes.insert(documento)
+        control = True
+    except:
+        pass
+    return control
 
 
 def update_doc(documento):
@@ -23,7 +29,6 @@ def update_doc(documento):
 def delete_doc(id):
     db = connection()
     id = ObjectId(id)
-    print(id)
     db.superheroes.remove({'_id': ObjectId(id)})
 
 
